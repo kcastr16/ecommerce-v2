@@ -3,11 +3,17 @@ import mysql from 'mysql2';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
+import { fileURLToPath } from 'url';  // Import these to get __dirname
+import { dirname } from 'path';      // Import to resolve the directory
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000; // Use the port Heroku provides
+
+// Get the current directory path equivalent to __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Middleware section
 app.use(express.json());
@@ -58,4 +64,4 @@ app.get('*', (req, res) => {
 // Start server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
-});
+});s
