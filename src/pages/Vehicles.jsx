@@ -13,7 +13,7 @@ const Vehicles = () => {
   const getVehicles = () => {
     // Fetch vehicles data using Axios
     axios
-      .get('http://localhost:5000/getVehicles')
+      .get('https://ecommerce-v2-kevin-76c743e6deab.herokuapp.com/getVehicles')
       .then((response) => {
         console.log('Response from server:', response.data); // Log the data from the server
         setVehicles(response.data); // Update state with the fetched data
