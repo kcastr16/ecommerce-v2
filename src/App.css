@@ -133,6 +133,7 @@ body {
     margin-top: 200px;
     margin-left: 15%;
     border-radius: 25px;
+    margin-bottom: 20px;
  }
 
   .gallery-section .gallery-txt {
@@ -187,6 +188,10 @@ body {
     z-index: 1000; 
     padding-top: 50px;
     padding-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .footer ul {
@@ -194,7 +199,7 @@ body {
     list-style: none;
     gap: 20px; /* Space between items */
     margin: 0;
-    padding: 0;
+    padding: 20px;
 }
 
 .footer li {
@@ -209,6 +214,11 @@ body {
     padding: 10px 15px;
     border-radius: 8px;
     transition: all 0.3s ease;
+}
+
+.footer .linkedin {
+  width: 20%;
+  margin-left: 670px;
 }
 
 
@@ -446,6 +456,8 @@ button {
 button:hover {
   background: #e03e3e;
 }
+
+
 
 
 

@@ -16,6 +16,9 @@ const Footer = () => {
                         <NavLink to="/contact" activeClassName="active">Contact Us</NavLink>
                     </li>
                 </ul>
+                <a href='https://www.linkedin.com/in/kcastr1628/'>
+                    <img className="linkedin" src='https://upload.wikimedia.org/wikipedia/commons/a/aa/LinkedIn_2021.svg'></img>
+                </a>
             </footer>        
         </>
     )
