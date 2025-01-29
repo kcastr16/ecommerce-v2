@@ -2,19 +2,20 @@ import express from 'express';
 import mysql from 'mysql2';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
 
 dotenv.config();
 
 const app = express();
-const port = 5000; // Server port
+const port = process.env.PORT || 5000; // Use the port Heroku provides
 
 // Middleware section
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:5173',  // Replace with your React app's URL if different
-    methods: ['GET'],
-    allowedHeaders: ['Content-Type'],
-  }));
+  origin: process.env.CLIENT_URL,  // Make sure your React app's URL is set in .env
+  methods: ['GET'],
+  allowedHeaders: ['Content-Type'],
+}));
 
 // SQL connection
 const db = mysql.createConnection({
@@ -34,21 +35,27 @@ db.connect((err) => {
 
 // API route to fetch vehicles
 app.get('/getVehicles', (req, res) => {
-    const query = 'SELECT * FROM vehicle';  // Ensure the query is correct
-    db.query(query, (err, results) => {
-      if (err) {
-        console.error('Error executing query:', err);
-        res.status(500).json({ error: err.message });
-      } else {
-        console.log('Results from the database:', results);  // Log the results here
-        res.json(results);
-      }
-    });
+  const query = 'SELECT * FROM vehicle';  // Ensure the query is correct
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      res.status(500).json({ error: err.message });
+    } else {
+      console.log('Results from the database:', results);  // Log the results here
+      res.json(results);
+    }
   });
+});
+
+// Serve static files from React app's build directory after building
+app.use(express.static(path.join(__dirname, '../dist')));
+
+// Handle all other requests and serve the React app's index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist', 'index.html'));
+});
 
 // Start server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
-
-  
